@@ -16,39 +16,39 @@ server.get('/', (req, res) => {
   res.send("It's alive!");
 });
 
-// server.post('/api/register', (req, res) => {
-//   let user = req.body;
-//   let hashPass
-  
-//   bcryptjs.genSalt(14, function(err, salt)
-//   {
-//     bcryptjs.hash(user.password, salt, function(err, hash)
-//     {
-//       hashPass = hash
-//       Users.add({username: user.username, password: hashPass})
-//         .then(saved => {
-//           res.status(201).json(saved);
-//         })
-//         .catch(error => {
-//           res.status(500).json(error);
-//         });
-//     })
-//   })
-// });
-// })
-
 server.post('/api/register', (req, res) => {
-  let {username, password} = req.body;
-  const hash = bcryptjs.hashSync(password, 12)
-
-  Users.add({username, password: hash})
-    .then(saved => {
-      res.status(201).json(saved);
+  let user = req.body;
+  let hashPass
+  
+  bcryptjs.genSalt(14, function(err, salt)
+  {
+    bcryptjs.hash(user.password, salt, function(err, hash)
+    {
+      hashPass = hash
+      Users.add({username: user.username, password: hashPass})
+        .then(saved => {
+          res.status(201).json(saved);
+        })
+        .catch(error => {
+          res.status(500).json(error);
+        });
     })
-    .catch(error => {
-      res.status(500).json(error);
-    });
+  })
 });
+
+
+// server.post('/api/register', (req, res) => {
+//   let {username, password} = req.body;
+//   const hash = bcryptjs.hashSync(password, 12)
+
+//   Users.add({username, password: hash})
+//     .then(saved => {
+//       res.status(201).json(saved);
+//     })
+//     .catch(error => {
+//       res.status(500).json(error);
+//     });
+// });
 
 server.post('/api/login', (req, res) => {
   let { username, password } = req.body;
