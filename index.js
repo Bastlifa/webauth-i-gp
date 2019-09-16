@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 const bcryptjs = require('bcryptjs')
 
-const restricted = require('./auth/auth-middleware')
+const restricted = require('./auth/restricted-middleware')
 const db = require('./database/dbConfig.js');
 const Users = require('./users/users-model.js');
 

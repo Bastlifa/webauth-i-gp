@@ -20,6 +20,10 @@ module.exports = function restricted(req, res, next)
                         res.status(401).json({ message: 'Invalid Credentials' })
                     }
                 })
+            .catch(err =>
+                {
+                    res.status(500).json(error)
+                })
     }
     else res.status(401).json({ message: `Please provide valid credentials` })
 }
